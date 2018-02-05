@@ -73,6 +73,8 @@ public class VendingMachine {
             }
             else if (totalCredit >= costOfSelection) {
                 machineMessage = "THANK YOU";
+                selection = NO_SELECTION;
+                totalCredit = NO_CREDIT;
             }
         }
         else {
