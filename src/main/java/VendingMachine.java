@@ -3,11 +3,23 @@
  */
 import java.lang.String;
 public class VendingMachine {
+    private float totalCredit = 0f;
 
     public void addCoin(String coin) {
+        totalCredit += getCoinValue(coin);
         return;
     }
+
+    public float getCoinValue(String coin) {
+        if (coin == "nickel") {
+            return 0.05f;
+        }
+        else {
+            return 0f;
+        }
+    }
+
     public float getTotalCredit() {
-        return 0f;
+        return totalCredit;
     }
 }
