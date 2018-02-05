@@ -13,6 +13,8 @@ public class VendingMachineTest {
     private final String QUARTER = "quarter";
 
     private final String COLA = "cola";
+    private final String CHIPS = "chips";
+    private final String CANDY = "candy";
 
     @Test public void vendingMachingRejectsPennies() {
         VendingMachine vm = new VendingMachine();
@@ -85,6 +87,20 @@ public class VendingMachineTest {
         VendingMachine vm = new VendingMachine();
         vm.selectItem(COLA);
         assertEquals(vm.getMachineMessage(), "PRICE: $1.00");
+    }
+
+    @Test
+    public void SelectChipsAndCheckMessageWithNoCoins() {
+        VendingMachine vm = new VendingMachine();
+        vm.selectItem(CHIPS);
+        assertEquals(vm.getMachineMessage(), "PRICE: $0.50");
+    }
+
+    @Test
+    public void SelectCandyAndCheckMessageWithNoCoins() {
+        VendingMachine vm = new VendingMachine();
+        vm.selectItem(CANDY);
+        assertEquals(vm.getMachineMessage(), "PRICE: $0.65");
     }
 
     @Test

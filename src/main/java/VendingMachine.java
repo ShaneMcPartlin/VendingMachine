@@ -17,10 +17,14 @@ public class VendingMachine {
     private float UNACCEPTED_COIN_VALUE = 0f;
 
     private final String COLA_SELECTION = "cola";
+    private final String CHIPS_SELECTION = "chips";
+    private final String CANDY_SELECTION = "candy";
     private final String NO_SELECTION = "";
     private String selection = NO_SELECTION;
 
     private final float COLA_COST = 1.0f;
+    private final float CHIPS_COST = 0.5f;
+    private final float CANDY_COST = 0.65f;
     private final float NO_CREDIT = 0f;
     private float costOfSelection = NO_CREDIT;
 
@@ -61,6 +65,16 @@ public class VendingMachine {
         if (item == COLA_SELECTION) {
             selection = COLA_SELECTION;
             costOfSelection = COLA_COST;
+            firstCheckOfMessageAfterMakingSelection = true;
+        }
+        else if (item == CHIPS_SELECTION) {
+            selection = CHIPS_SELECTION;
+            costOfSelection = CHIPS_COST;
+            firstCheckOfMessageAfterMakingSelection = true;
+        }
+        else if (item == CANDY_SELECTION) {
+            selection = CANDY_SELECTION;
+            costOfSelection = CANDY_COST;
             firstCheckOfMessageAfterMakingSelection = true;
         }
     }
