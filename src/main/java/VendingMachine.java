@@ -9,7 +9,7 @@ public class VendingMachine {
     private float totalCredit = 0f;
 
     private String machineMessage = "INSERT COIN";
-    private boolean firstCheckOfMessageAfterMakingSelection = true;
+    private boolean firstCheckOfMessageAfterMakingSelection = false;
 
     private float NICKEL_VALUE = 0.05f;
     private float DIME_VALUE = 0.1f;
@@ -20,8 +20,9 @@ public class VendingMachine {
     private final String NO_SELECTION = "";
     private String selection = NO_SELECTION;
 
-    private float COLA_COST = 1.0f;
-    private float NO_CREDIT = 0f;
+    private final float COLA_COST = 1.0f;
+    private final float NO_CREDIT = 0f;
+    private float costOfSelection = NO_CREDIT;
 
     public void addCoin(String coin) {
         totalCredit += getCoinValue(coin);
@@ -31,11 +32,14 @@ public class VendingMachine {
     public float getCoinValue(String coin) {
         if (coin == "nickel") {
             return NICKEL_VALUE;
-        } else if (coin == "dime") {
+        }
+        else if (coin == "dime") {
             return DIME_VALUE;
-        } else if (coin == "quarter") {
+        }
+        else if (coin == "quarter") {
             return QUARTER_VALUE;
-        } else {
+        }
+        else {
             return UNACCEPTED_COIN_VALUE;
         }
     }
@@ -45,6 +49,7 @@ public class VendingMachine {
     }
 
     public String getMachineMessage() {
+        setMachineMessage();
         return machineMessage;
     }
 
@@ -55,17 +60,26 @@ public class VendingMachine {
     public void changeMessagePerSelection(String item) {
         if (item == COLA_SELECTION) {
             selection = COLA_SELECTION;
-            machineMessage = getSelectionMessage(item, COLA_COST);
+            costOfSelection = COLA_COST;
+            firstCheckOfMessageAfterMakingSelection = true;
         }
     }
 
-    public String getSelectionMessage(String item, float priceOfSelection) {
+    public void setMachineMessage() {
         if (firstCheckOfMessageAfterMakingSelection) {
             firstCheckOfMessageAfterMakingSelection = false;
-            return "PRICE: $" + String.format("%.2f", priceOfSelection);
+            machineMessage = "PRICE: $" + String.format("%.2f", costOfSelection);
         }
         else {
-            return "INSERT COIN";
+            if (totalCredit == NO_CREDIT) {
+                machineMessage = "INSERT COIN";
+            }
+            else if (totalCredit < costOfSelection) {
+                machineMessage = "CREDIT: $" + String.format("%.2f", totalCredit);
+            }
+            else {
+                machineMessage = "INSERT COIN";
+            }
         }
     }
 

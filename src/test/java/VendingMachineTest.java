@@ -91,7 +91,16 @@ public class VendingMachineTest {
     public void SelectColaAndCheckMessageTwice() {
         VendingMachine vm = new VendingMachine();
         vm.selectItem(COLA);
-        vm.selectItem(COLA);
+        vm.getMachineMessage();
         assertEquals(vm.getMachineMessage(), "INSERT COIN");
+    }
+
+    @Test
+    public void SelectColaAndCheckMessageThenInsertAQuarterAndCheckMessageAgain() {
+        VendingMachine vm = new VendingMachine();
+        vm.selectItem(COLA);
+        vm.getMachineMessage();
+        vm.addCoin(QUARTER);
+        assertEquals(vm.getMachineMessage(), "CREDIT: $0.25");
     }
 }
