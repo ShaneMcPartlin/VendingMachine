@@ -14,6 +14,9 @@ public class VendingMachine {
         if (coin == "nickel") {
             return 0.05f;
         }
+        else if (coin == "dime") {
+            return 0.1f;
+        }
         else {
             return 0f;
         }

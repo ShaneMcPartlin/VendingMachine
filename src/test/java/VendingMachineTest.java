@@ -7,17 +7,25 @@ public class VendingMachineTest {
     private final float marginOfErrorForComparingFloats = 0;
     private final String PENNY = "penny";
     private final String NICKEL = "nickel";
+    private final String DIME = "dime";
 
     @Test public void vendingMachingRejectsPennies() {
         VendingMachine vm = new VendingMachine();
-        vm.addCoin("penny");
+        vm.addCoin(PENNY);
         assertEquals(vm.getTotalCredit(), 0f, marginOfErrorForComparingFloats);
     }
 
     @Test
     public void vendingMachineAcceptsNickels() {
         VendingMachine vm = new VendingMachine();
-        vm.addCoin("nickel");
+        vm.addCoin(NICKEL);
         assertEquals(vm.getTotalCredit(), 0.05f, marginOfErrorForComparingFloats);
+    }
+
+    @Test
+    public void vendingMachineAcceptsDimes() {
+        VendingMachine vm = new VendingMachine();
+        vm.addCoin(DIME);
+        assertEquals(vm.getTotalCredit(), 0.1f, marginOfErrorForComparingFloats);
     }
 }
