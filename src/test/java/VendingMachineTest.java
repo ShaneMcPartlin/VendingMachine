@@ -152,5 +152,18 @@ public class VendingMachineTest {
         vm.selectItem(COLA);
         vm.getMachineMessage();
         assertEquals(vm.getMachineMessage(), "INSERT COIN");
-    }    
+    }
+    
+    @Test
+    public void BuyAColaWithFiveQuartersAndCheckCoinReturn() {
+        VendingMachine vm = new VendingMachine();
+        vm.addCoin(QUARTER);
+        vm.addCoin(QUARTER);
+        vm.addCoin(QUARTER);
+        vm.addCoin(QUARTER);
+        vm.addCoin(QUARTER);
+        vm.selectItem(COLA);
+        vm.buySelection();
+        assertEquals(vm.checkCoinReturn(), "COIN RETURN: $0.25");
+    }
 }

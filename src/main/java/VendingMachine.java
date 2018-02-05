@@ -7,6 +7,7 @@ import java.lang.String;
 public class VendingMachine {
 
     private float totalCredit = 0f;
+    private float coinReturn = 0f;
 
     private String machineMessage = "INSERT COIN";
     private boolean firstCheckOfMessageAfterMakingSelection = false;
@@ -79,8 +80,6 @@ public class VendingMachine {
             }
             else if (totalCredit >= costOfSelection) {
                 machineMessage = "THANK YOU";
-                selection = NO_SELECTION;
-                totalCredit = NO_CREDIT;
             }
         }
         else {
@@ -94,6 +93,21 @@ public class VendingMachine {
                 machineMessage = "INSERT COIN";
             }
         }
+    }
+
+    public void buySelection() {
+        makeChange();
+        selection = NO_SELECTION;
+        costOfSelection = NO_CREDIT;
+    }
+
+    public void makeChange() {
+        coinReturn = totalCredit - costOfSelection;
+        totalCredit = 0f;
+    }
+
+    public String checkCoinReturn() {
+        return "COIN RETURN: $" + String.format("%.2f", coinReturn);
     }
 
     public String getSelection() {
