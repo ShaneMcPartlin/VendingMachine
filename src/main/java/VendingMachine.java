@@ -17,6 +17,9 @@ public class VendingMachine {
         else if (coin == "dime") {
             return 0.1f;
         }
+        else if (coin == "quarter") {
+            return 0.25f;
+        }
         else {
             return 0f;
         }

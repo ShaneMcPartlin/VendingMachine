@@ -8,6 +8,7 @@ public class VendingMachineTest {
     private final String PENNY = "penny";
     private final String NICKEL = "nickel";
     private final String DIME = "dime";
+    private final String QUARTER = "quarter";
 
     @Test public void vendingMachingRejectsPennies() {
         VendingMachine vm = new VendingMachine();
@@ -27,5 +28,12 @@ public class VendingMachineTest {
         VendingMachine vm = new VendingMachine();
         vm.addCoin(DIME);
         assertEquals(vm.getTotalCredit(), 0.1f, marginOfErrorForComparingFloats);
+    }
+
+    @Test
+    public void vendingMachineAcceptsQuarters() {
+        VendingMachine vm = new VendingMachine();
+        vm.addCoin(QUARTER);
+        assertEquals(vm.getTotalCredit(), 0.25f, marginOfErrorForComparingFloats);
     }
 }
