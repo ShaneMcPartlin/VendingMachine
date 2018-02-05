@@ -55,7 +55,12 @@ public class VendingMachine {
     public void changeMessagePerSelection(String item) {
         if (item == COLA_SELECTION) {
             selection = COLA_SELECTION;
+            machineMessage = getSelectionMessage(item, COLA_COST);
         }
+    }
+
+    public String getSelectionMessage(String item, float priceOfSelection) {
+        return "PRICE: $" + String.format("%.2f", priceOfSelection);
     }
 
     public String getSelection() {

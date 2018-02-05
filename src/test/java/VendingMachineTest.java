@@ -74,9 +74,16 @@ public class VendingMachineTest {
     }
 
     @Test
-    public void SelectColaAndCheckMessageWithNoCoins() {
+    public void SelectColaAndCheckSelection() {
         VendingMachine vm = new VendingMachine();
         vm.selectItem(COLA);
         assertEquals(vm.getSelection(), "cola");
+    }
+
+    @Test
+    public void SelectColaAndCheckMessageWithNoCoins() {
+        VendingMachine vm = new VendingMachine();
+        vm.selectItem(COLA);
+        assertEquals(vm.getMachineMessage(), "PRICE: $1.00");
     }
 }
