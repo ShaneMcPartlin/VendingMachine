@@ -4,6 +4,7 @@
 import java.lang.String;
 public class VendingMachine {
     private float totalCredit = 0f;
+    private String machineMessage = "INSERT COIN";
 
     public void addCoin(String coin) {
         totalCredit += getCoinValue(coin);
@@ -27,5 +28,9 @@ public class VendingMachine {
 
     public float getTotalCredit() {
         return totalCredit;
+    }
+
+    public String getMachineMessage() {
+        return machineMessage;
     }
 }

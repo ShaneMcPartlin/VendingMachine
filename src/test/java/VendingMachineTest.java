@@ -1,5 +1,7 @@
 import org.junit.Test;
 import static org.junit.Assert.*;
+
+import java.beans.Transient;
 import java.lang.String;
 
 public class VendingMachineTest {
@@ -54,5 +56,18 @@ public class VendingMachineTest {
         vm.addCoin(DIME);
         vm.addCoin(PENNY);
         assertEquals(vm.getTotalCredit(), 0.40f, marginOfErrorForComparingFloats);
+    }
+    
+    @Test
+    public void vendingMachineHasMessageINSERTCOIN() {
+        VendingMachine vm = new VendingMachine();
+        assertEquals(vm.getMachineMessage(), "INSERT COIN");
+    }
+
+    @Test
+    public void vendingMachineHasMessageINSERTCOINAfterAddingCoins() {
+        VendingMachine vm = new VendingMachine();
+        vm.addCoin(QUARTER);
+        assertEquals(vm.getMachineMessage(), "INSERT COIN");
     }
 }
