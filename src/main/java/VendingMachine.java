@@ -58,24 +58,16 @@ public class VendingMachine {
     }
 
     public void selectItem(String item) {
-        changeMessagePerSelection(item);
-    }
-
-    public void changeMessagePerSelection(String item) {
+        selection = item;
+        firstCheckOfMessageAfterMakingSelection = true;
         if (item == COLA_SELECTION) {
-            selection = COLA_SELECTION;
             costOfSelection = COLA_COST;
-            firstCheckOfMessageAfterMakingSelection = true;
         }
         else if (item == CHIPS_SELECTION) {
-            selection = CHIPS_SELECTION;
             costOfSelection = CHIPS_COST;
-            firstCheckOfMessageAfterMakingSelection = true;
         }
         else if (item == CANDY_SELECTION) {
-            selection = CANDY_SELECTION;
             costOfSelection = CANDY_COST;
-            firstCheckOfMessageAfterMakingSelection = true;
         }
     }
 
