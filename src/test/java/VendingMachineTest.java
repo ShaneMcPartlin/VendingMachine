@@ -45,4 +45,14 @@ public class VendingMachineTest {
         vm.addCoin(DIME);
         assertEquals(vm.getTotalCredit(), 0.40f, marginOfErrorForComparingFloats);
     }
+
+    @Test
+    public void vendingMachineCorrectlyAddsQuarterNickelDimeAndPennyToTotalValue() {
+        VendingMachine vm = new VendingMachine();
+        vm.addCoin(QUARTER);
+        vm.addCoin(NICKEL);
+        vm.addCoin(DIME);
+        vm.addCoin(PENNY);
+        assertEquals(vm.getTotalCredit(), 0.40f, marginOfErrorForComparingFloats);
+    }
 }
