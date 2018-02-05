@@ -68,7 +68,12 @@ public class VendingMachine {
     public void setMachineMessage() {
         if (firstCheckOfMessageAfterMakingSelection) {
             firstCheckOfMessageAfterMakingSelection = false;
-            machineMessage = "PRICE: $" + String.format("%.2f", costOfSelection);
+            if (totalCredit < costOfSelection) {
+                machineMessage = "PRICE: $" + String.format("%.2f", costOfSelection);
+            }
+            else if (totalCredit >= costOfSelection) {
+                machineMessage = "THANK YOU";
+            }
         }
         else {
             if (totalCredit == NO_CREDIT) {

@@ -114,4 +114,15 @@ public class VendingMachineTest {
         vm.addCoin(QUARTER);
         assertEquals(vm.getMachineMessage(), "CREDIT: $0.75");
     }
+
+    @Test
+    public void InsertFourQuartersAndSelectColaAndCheckMessage() {
+        VendingMachine vm = new VendingMachine();
+        vm.addCoin(QUARTER);
+        vm.addCoin(QUARTER);
+        vm.addCoin(QUARTER);
+        vm.addCoin(QUARTER);
+        vm.selectItem(COLA);
+        assertEquals(vm.getMachineMessage(), "THANK YOU");
+    }
 }
