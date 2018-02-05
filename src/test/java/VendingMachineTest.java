@@ -12,6 +12,8 @@ public class VendingMachineTest {
     private final String DIME = "dime";
     private final String QUARTER = "quarter";
 
+    private final String COLA = "cola";
+
     @Test public void vendingMachingRejectsPennies() {
         VendingMachine vm = new VendingMachine();
         vm.addCoin(PENNY);
@@ -69,5 +71,12 @@ public class VendingMachineTest {
         VendingMachine vm = new VendingMachine();
         vm.addCoin(QUARTER);
         assertEquals(vm.getMachineMessage(), "INSERT COIN");
+    }
+
+    @Test
+    public void SelectColaAndCheckMessageWithNoCoins() {
+        VendingMachine vm = new VendingMachine();
+        vm.selectItem(COLA);
+        assertEquals(vm.getSelection(), "cola");
     }
 }

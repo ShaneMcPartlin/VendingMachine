@@ -3,8 +3,22 @@
  */
 import java.lang.String;
 public class VendingMachine {
+
     private float totalCredit = 0f;
+
     private String machineMessage = "INSERT COIN";
+
+    private float NICKEL_VALUE = 0.05f;
+    private float DIME_VALUE = 0.1f;
+    private float QUARTER_VALUE = 0.25f;
+    private float UNACCEPTED_COIN_VALUE = 0f;
+
+    private final String COLA_SELECTION = "cola";
+    private final String NO_SELECTION = "";
+    private String selection = NO_SELECTION;
+
+    private float COLA_COST = 1.0f;
+    private float NO_CREDIT = 0f;
 
     public void addCoin(String coin) {
         totalCredit += getCoinValue(coin);
@@ -13,16 +27,16 @@ public class VendingMachine {
 
     public float getCoinValue(String coin) {
         if (coin == "nickel") {
-            return 0.05f;
+            return NICKEL_VALUE;
         }
         else if (coin == "dime") {
-            return 0.1f;
+            return DIME_VALUE;
         }
         else if (coin == "quarter") {
-            return 0.25f;
+            return QUARTER_VALUE;
         }
         else {
-            return 0f;
+            return UNACCEPTED_COIN_VALUE;
         }
     }
 
@@ -32,5 +46,19 @@ public class VendingMachine {
 
     public String getMachineMessage() {
         return machineMessage;
+    }
+
+    public void selectItem(String item) {
+        changeMessagePerSelection(item);
+    }
+
+    public void changeMessagePerSelection(String item) {
+        if (item == COLA_SELECTION) {
+            selection = COLA_SELECTION;
+        }
+    }
+
+    public String getSelection() {
+        return selection;
     }
 }
