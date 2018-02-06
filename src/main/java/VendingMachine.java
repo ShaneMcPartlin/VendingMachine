@@ -4,6 +4,8 @@
  */
 import java.lang.String;
 
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane.RestoreAction;
+
 public class VendingMachine {
 
     private float totalCredit = 0f;
@@ -49,41 +51,70 @@ public class VendingMachine {
     }
 
     public String getMachineMessage() {
-        setMachineMessage();
+        return setMachineMessageToDisplayBetweenDefaultAndSpecialMessages();
+    }
+
+    public String setMachineMessageToDisplayBetweenDefaultAndSpecialMessages() {
+        String messageToReturn = machineMessage;
+        setMachineMessageToDefaults();
+        if (messageToReturn != makeCreditMessage() && messageToReturn != "INSERT COIN") {
+            return messageToReturn;
+        }
         return machineMessage;
     }
 
     public void selectItem(InventoryItem item) {
         selectedItem = item;
         firstCheckOfMessageAfterMakingSelection = true;
+        if (item.soldOut) {
+            machineMessage = "SOLD OUT";
+            return;
+        }
+        if (totalCredit >= item.cost) {
+            machineMessage = "THANK YOU";
+            buySelection();
+        }
+        else if (totalCredit < item.cost) {
+            machineMessage = "PRICE: $" + String.format("%.2f", item.cost);
+        }
     }
 
-    public void setMachineMessage() {
-        if (firstCheckOfMessageAfterMakingSelection) {
-            if (selectedItem.soldOut) {
-                machineMessage = "SOLD OUT";
-                selectedItem = NO_ITEM;
-                return;
-            }
-            firstCheckOfMessageAfterMakingSelection = false;
-            if (totalCredit < selectedItem.cost) {
-                machineMessage = "PRICE: $" + String.format("%.2f", selectedItem.cost);
-            }
-            else if (totalCredit >= selectedItem.cost) {
-                machineMessage = "THANK YOU";
-            }
+    public void setMachineMessageToDefaults() {
+        if (totalCredit == NO_CREDIT) {
+            machineMessage = "INSERT COIN";
         }
-        else {
-            if (totalCredit == NO_CREDIT) {
-                machineMessage = "INSERT COIN";
-            }
-            else if (totalCredit < selectedItem.cost) {
-                machineMessage = "CREDIT: $" + String.format("%.2f", totalCredit);
-            }
-            else {
-                machineMessage = "INSERT COIN";
-            }
+        else if (totalCredit > NO_CREDIT) {
+            machineMessage = makeCreditMessage();
         }
+        // if (firstCheckOfMessageAfterMakingSelection) {
+        //     if (selectedItem.soldOut) {
+        //         machineMessage = "SOLD OUT";
+        //         selectedItem = NO_ITEM;
+        //         return;
+        //     }
+        //     firstCheckOfMessageAfterMakingSelection = false;
+        //     if (totalCredit < selectedItem.cost) {
+        //         machineMessage = "PRICE: $" + String.format("%.2f", selectedItem.cost);
+        //     }
+        //     else if (totalCredit >= selectedItem.cost) {
+        //         machineMessage = "THANK YOU";
+        //     }
+        // }
+        // else {
+        //     if (totalCredit == NO_CREDIT) {
+        //         machineMessage = "INSERT COIN";
+        //     }
+        //     else if (totalCredit < selectedItem.cost) {
+        //         machineMessage = "CREDIT: $" + String.format("%.2f", totalCredit);
+        //     }
+        //     else {
+        //         machineMessage = "INSERT COIN";
+        //     }
+        // }
+    }
+
+    public String makeCreditMessage() {
+        return "CREDIT: $" + String.format("%.2f", totalCredit);
     }
 
     public void buySelection() {
@@ -95,7 +126,7 @@ public class VendingMachine {
         coinReturn = totalCredit;
         totalCredit = NO_CREDIT;
         selectedItem = NO_ITEM;
-        machineMessage = "INSERT_COIN";
+        setMachineMessageToDefaults();
     }
 
     public void makeChange() {

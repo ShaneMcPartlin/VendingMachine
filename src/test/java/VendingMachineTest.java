@@ -65,10 +65,10 @@ public class VendingMachineTest {
     }
 
     @Test
-    public void vendingMachineHasMessageINSERTCOINAfterAddingCoins() {
+    public void vendingMachineMessageIndicatesCreditAfterAddingCoins() {
         VendingMachine vm = new VendingMachine();
         vm.addCoin(QUARTER);
-        assertEquals(vm.getMachineMessage(), "INSERT COIN");
+        assertEquals(vm.getMachineMessage(), "CREDIT: $0.25");
     }
 
     @Test
@@ -159,7 +159,6 @@ public class VendingMachineTest {
         vm.addCoin(QUARTER);
         vm.addCoin(QUARTER);
         vm.selectItem(vm.COLA);
-        vm.buySelection();
         assertEquals(vm.checkCoinReturn(), "COIN RETURN: $0.25");
     }
 
