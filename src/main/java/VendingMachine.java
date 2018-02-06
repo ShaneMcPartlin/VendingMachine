@@ -12,22 +12,17 @@ public class VendingMachine {
     private String machineMessage = "INSERT COIN";
     private boolean firstCheckOfMessageAfterMakingSelection = false;
 
-    private float NICKEL_VALUE = 0.05f;
-    private float DIME_VALUE = 0.1f;
-    private float QUARTER_VALUE = 0.25f;
-    private float UNACCEPTED_COIN_VALUE = 0f;
+    public final float NICKEL_VALUE = 0.05f;
+    public final float DIME_VALUE = 0.1f;
+    public final float QUARTER_VALUE = 0.25f;
+    public final float UNACCEPTED_COIN_VALUE = 0f;
 
-    private final String COLA_SELECTION = "cola";
-    private final String CHIPS_SELECTION = "chips";
-    private final String CANDY_SELECTION = "candy";
-    private final String NO_SELECTION = "";
-    private String selection = NO_SELECTION;
-
-    private final float COLA_COST = 1.0f;
-    private final float CHIPS_COST = 0.5f;
-    private final float CANDY_COST = 0.65f;
+    public InventoryItem COLA = new InventoryItem("cola", 1f);
+    public InventoryItem CHIPS = new InventoryItem("chips", 0.5f);
+    public InventoryItem CANDY = new InventoryItem("candy", 0.65f);
+    public InventoryItem NO_ITEM = new InventoryItem("", 0f);
+    private InventoryItem selectedItem = NO_ITEM;
     private final float NO_CREDIT = 0f;
-    private float costOfSelection = NO_CREDIT;
 
     public void addCoin(String coin) {
         totalCredit += getCoinValue(coin);
@@ -58,27 +53,23 @@ public class VendingMachine {
         return machineMessage;
     }
 
-    public void selectItem(String item) {
-        selection = item;
+    public void selectItem(InventoryItem item) {
+        selectedItem = item;
         firstCheckOfMessageAfterMakingSelection = true;
-        if (item == COLA_SELECTION) {
-            costOfSelection = COLA_COST;
-        }
-        else if (item == CHIPS_SELECTION) {
-            costOfSelection = CHIPS_COST;
-        }
-        else if (item == CANDY_SELECTION) {
-            costOfSelection = CANDY_COST;
-        }
     }
 
     public void setMachineMessage() {
         if (firstCheckOfMessageAfterMakingSelection) {
-            firstCheckOfMessageAfterMakingSelection = false;
-            if (totalCredit < costOfSelection) {
-                machineMessage = "PRICE: $" + String.format("%.2f", costOfSelection);
+            if (selectedItem.soldOut) {
+                machineMessage = "SOLD OUT";
+                selectedItem = NO_ITEM;
+                return;
             }
-            else if (totalCredit >= costOfSelection) {
+            firstCheckOfMessageAfterMakingSelection = false;
+            if (totalCredit < selectedItem.cost) {
+                machineMessage = "PRICE: $" + String.format("%.2f", selectedItem.cost);
+            }
+            else if (totalCredit >= selectedItem.cost) {
                 machineMessage = "THANK YOU";
             }
         }
@@ -86,7 +77,7 @@ public class VendingMachine {
             if (totalCredit == NO_CREDIT) {
                 machineMessage = "INSERT COIN";
             }
-            else if (totalCredit < costOfSelection) {
+            else if (totalCredit < selectedItem.cost) {
                 machineMessage = "CREDIT: $" + String.format("%.2f", totalCredit);
             }
             else {
@@ -97,20 +88,18 @@ public class VendingMachine {
 
     public void buySelection() {
         makeChange();
-        selection = NO_SELECTION;
-        costOfSelection = NO_CREDIT;
+        selectedItem = NO_ITEM;
     }
 
     public void returnCoins() {
         coinReturn = totalCredit;
         totalCredit = NO_CREDIT;
-        selection = NO_SELECTION;
-        costOfSelection = NO_CREDIT;
+        selectedItem = NO_ITEM;
         machineMessage = "INSERT_COIN";
     }
 
     public void makeChange() {
-        coinReturn = totalCredit - costOfSelection;
+        coinReturn = totalCredit - selectedItem.cost;
         totalCredit = NO_CREDIT;
     }
 
@@ -118,7 +107,25 @@ public class VendingMachine {
         return "COIN RETURN: $" + String.format("%.2f", coinReturn);
     }
 
-    public String getSelection() {
-        return selection;
+    public String getSelectedItemName() {
+        return selectedItem.name;
+    }
+
+    public void makeItemSoldOut(InventoryItem item) {
+        item.setSoldOut(true);
+    }
+
+    public class InventoryItem {
+        private String name;
+        private float cost;
+        private boolean soldOut = false; 
+        InventoryItem(String name, float cost) {
+            this.name = name;
+            this.cost = cost;
+        }
+
+        public void setSoldOut(boolean setting) {
+            soldOut = setting;
+        }
     }
 }

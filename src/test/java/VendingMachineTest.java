@@ -12,10 +12,6 @@ public class VendingMachineTest {
     private final String DIME = "dime";
     private final String QUARTER = "quarter";
 
-    private final String COLA = "cola";
-    private final String CHIPS = "chips";
-    private final String CANDY = "candy";
-
     @Test public void vendingMachingRejectsPennies() {
         VendingMachine vm = new VendingMachine();
         vm.addCoin(PENNY);
@@ -78,35 +74,35 @@ public class VendingMachineTest {
     @Test
     public void SelectColaAndCheckSelection() {
         VendingMachine vm = new VendingMachine();
-        vm.selectItem(COLA);
-        assertEquals(vm.getSelection(), "cola");
+        vm.selectItem(vm.COLA);
+        assertEquals(vm.getSelectedItemName(), "cola");
     }
 
     @Test
     public void SelectColaAndCheckMessageWithNoCoins() {
         VendingMachine vm = new VendingMachine();
-        vm.selectItem(COLA);
+        vm.selectItem(vm.COLA);
         assertEquals(vm.getMachineMessage(), "PRICE: $1.00");
     }
 
     @Test
     public void SelectChipsAndCheckMessageWithNoCoins() {
         VendingMachine vm = new VendingMachine();
-        vm.selectItem(CHIPS);
+        vm.selectItem(vm.CHIPS);
         assertEquals(vm.getMachineMessage(), "PRICE: $0.50");
     }
 
     @Test
     public void SelectCandyAndCheckMessageWithNoCoins() {
         VendingMachine vm = new VendingMachine();
-        vm.selectItem(CANDY);
+        vm.selectItem(vm.CANDY);
         assertEquals(vm.getMachineMessage(), "PRICE: $0.65");
     }
 
     @Test
     public void SelectColaAndCheckMessageTwice() {
         VendingMachine vm = new VendingMachine();
-        vm.selectItem(COLA);
+        vm.selectItem(vm.COLA);
         vm.getMachineMessage();
         assertEquals(vm.getMachineMessage(), "INSERT COIN");
     }
@@ -114,7 +110,7 @@ public class VendingMachineTest {
     @Test
     public void SelectColaAndCheckMessageThenInsertAQuarterAndCheckMessageAgain() {
         VendingMachine vm = new VendingMachine();
-        vm.selectItem(COLA);
+        vm.selectItem(vm.COLA);
         vm.getMachineMessage();
         vm.addCoin(QUARTER);
         assertEquals(vm.getMachineMessage(), "CREDIT: $0.25");
@@ -123,7 +119,7 @@ public class VendingMachineTest {
     @Test
     public void SelectColaAndCheckMessageThenInsertThreeQuartersAndCheckMessageAgain() {
         VendingMachine vm = new VendingMachine();
-        vm.selectItem(COLA);
+        vm.selectItem(vm.COLA);
         vm.getMachineMessage();
         vm.addCoin(QUARTER);
         vm.addCoin(QUARTER);
@@ -138,7 +134,7 @@ public class VendingMachineTest {
         vm.addCoin(QUARTER);
         vm.addCoin(QUARTER);
         vm.addCoin(QUARTER);
-        vm.selectItem(COLA);
+        vm.selectItem(vm.COLA);
         assertEquals(vm.getMachineMessage(), "THANK YOU");
     }
 
@@ -149,7 +145,7 @@ public class VendingMachineTest {
         vm.addCoin(QUARTER);
         vm.addCoin(QUARTER);
         vm.addCoin(QUARTER);
-        vm.selectItem(COLA);
+        vm.selectItem(vm.COLA);
         vm.getMachineMessage();
         assertEquals(vm.getMachineMessage(), "INSERT COIN");
     }
@@ -162,7 +158,7 @@ public class VendingMachineTest {
         vm.addCoin(QUARTER);
         vm.addCoin(QUARTER);
         vm.addCoin(QUARTER);
-        vm.selectItem(COLA);
+        vm.selectItem(vm.COLA);
         vm.buySelection();
         assertEquals(vm.checkCoinReturn(), "COIN RETURN: $0.25");
     }
@@ -178,5 +174,13 @@ public class VendingMachineTest {
         vm.returnCoins();
         assertEquals(vm.checkCoinReturn(), "COIN RETURN: $1.25");
         assertEquals(vm.getMachineMessage(), "INSERT COIN");
+    }
+
+    @Test
+    public void SelectASoldOutItemAndCheckMessage() {
+        VendingMachine vm = new VendingMachine();
+        vm.makeItemSoldOut(vm.COLA);
+        vm.selectItem(vm.COLA);
+        assertEquals(vm.getMachineMessage(), "SOLD OUT");
     }
 }
