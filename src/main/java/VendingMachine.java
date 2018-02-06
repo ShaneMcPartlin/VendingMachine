@@ -101,9 +101,17 @@ public class VendingMachine {
         costOfSelection = NO_CREDIT;
     }
 
+    public void returnCoins() {
+        coinReturn = totalCredit;
+        totalCredit = NO_CREDIT;
+        selection = NO_SELECTION;
+        costOfSelection = NO_CREDIT;
+        machineMessage = "INSERT_COIN";
+    }
+
     public void makeChange() {
         coinReturn = totalCredit - costOfSelection;
-        totalCredit = 0f;
+        totalCredit = NO_CREDIT;
     }
 
     public String checkCoinReturn() {
