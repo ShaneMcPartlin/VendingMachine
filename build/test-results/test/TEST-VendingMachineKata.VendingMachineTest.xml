@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="VendingMachineKata.VendingMachineTest" tests="20" skipped="0" failures="0" errors="0" timestamp="2018-02-06T07:50:40" hostname="Shanes-MacBook-Pro.local" time="0.009">
+  <properties/>
+  <testcase name="SelectASoldOutItemAndCheckMessage" classname="VendingMachineKata.VendingMachineTest" time="0.002"/>
+  <testcase name="SelectColaAndCheckMessageThenInsertThreeQuartersAndCheckMessageAgain" classname="VendingMachineKata.VendingMachineTest" time="0.0"/>
+  <testcase name="vendingMachineAcceptsNickels" classname="VendingMachineKata.VendingMachineTest" time="0.0"/>
+  <testcase name="vendingMachineCorrectlyAddsQuarterNickelAndDimeToTotalValue" classname="VendingMachineKata.VendingMachineTest" time="0.0"/>
+  <testcase name="SelectColaAndCheckMessageWithNoCoins" classname="VendingMachineKata.VendingMachineTest" time="0.0"/>
+  <testcase name="SelectColaAndCheckMessageTwice" classname="VendingMachineKata.VendingMachineTest" time="0.0"/>
+  <testcase name="vendingMachineAcceptsDimes" classname="VendingMachineKata.VendingMachineTest" time="0.0"/>
+  <testcase name="vendingMachineAcceptsQuarters" classname="VendingMachineKata.VendingMachineTest" time="0.001"/>
+  <testcase name="InsertFiveQuartersAndUseCoinReturn" classname="VendingMachineKata.VendingMachineTest" time="0.0"/>
+  <testcase name="vendingMachineHasMessageINSERTCOIN" classname="VendingMachineKata.VendingMachineTest" time="0.0"/>
+  <testcase name="BuyAColaWithFiveQuartersAndCheckCoinReturn" classname="VendingMachineKata.VendingMachineTest" time="0.0"/>
+  <testcase name="vendingMachineMessageIndicatesCreditAfterAddingCoins" classname="VendingMachineKata.VendingMachineTest" time="0.0"/>
+  <testcase name="InsertFourQuartersAndSelectColaAndCheckMessage" classname="VendingMachineKata.VendingMachineTest" time="0.0"/>
+  <testcase name="SelectColaAndCheckMessageThenInsertAQuarterAndCheckMessageAgain" classname="VendingMachineKata.VendingMachineTest" time="0.0"/>
+  <testcase name="SelectCandyAndCheckMessageWithNoCoins" classname="VendingMachineKata.VendingMachineTest" time="0.0"/>
+  <testcase name="InsertFourQuartersAndSelectColaAndCheckMessageTwice" classname="VendingMachineKata.VendingMachineTest" time="0.001"/>
+  <testcase name="vendingMachineCorrectlyAddsQuarterNickelDimeAndPennyToTotalValue" classname="VendingMachineKata.VendingMachineTest" time="0.0"/>
+  <testcase name="SelectColaAndCheckSelection" classname="VendingMachineKata.VendingMachineTest" time="0.0"/>
+  <testcase name="vendingMachingRejectsPennies" classname="VendingMachineKata.VendingMachineTest" time="0.0"/>
+  <testcase name="SelectChipsAndCheckMessageWithNoCoins" classname="VendingMachineKata.VendingMachineTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
