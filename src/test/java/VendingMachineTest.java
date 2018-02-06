@@ -183,4 +183,11 @@ public class VendingMachineTest {
         vm.selectItem(vm.COLA);
         assertEquals(vm.getMachineMessage(), "SOLD OUT");
     }
+
+    @Test
+    public void EnableExactChangeOnlyMode() {
+        VendingMachine vm = new VendingMachine();
+        vm.setExactChangeMode(true);
+        assertEquals(vm.getMachineMessage(), "EXACT CHANGE ONLY");
+    }
 }

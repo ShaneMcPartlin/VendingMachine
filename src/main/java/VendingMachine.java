@@ -9,6 +9,7 @@ public class VendingMachine {
     private float totalCredit = 0f;
     private float coinReturn = 0f;
 
+    private boolean exactChangeMode = false;
     private String machineMessage = "INSERT COIN";
 
     public final float NICKEL_VALUE = 0.05f;
@@ -50,7 +51,9 @@ public class VendingMachine {
     private String setMachineMessageToDisplayBetweenDefaultAndSpecialMessages() {
         String messageToReturn = machineMessage;
         setMachineMessageToDefaults();
-        if (messageToReturn != "CREDIT:" + printFloatLikeMoney(totalCredit) && messageToReturn != "INSERT COIN") {
+        if (messageToReturn != "CREDIT:" + printFloatLikeMoney(totalCredit) &&
+            messageToReturn != "INSERT COIN" &&
+            messageToReturn != "EXACT CHANGE ONLY") {
             return messageToReturn;
         }
         return machineMessage;
@@ -73,6 +76,10 @@ public class VendingMachine {
 
     private void setMachineMessageToDefaults() {
         if (totalCredit == NO_CREDIT) {
+            if (exactChangeMode) {
+                machineMessage = "EXACT CHANGE ONLY";
+                return;
+            }
             machineMessage = "INSERT COIN";
         }
         else if (totalCredit > NO_CREDIT) {
@@ -111,6 +118,10 @@ public class VendingMachine {
 
     public void makeItemSoldOut(InventoryItem item) {
         item.setSoldOut(true);
+    }
+
+    public void setExactChangeMode(boolean setting) {
+        exactChangeMode = setting;
     }
 
     public class InventoryItem {
