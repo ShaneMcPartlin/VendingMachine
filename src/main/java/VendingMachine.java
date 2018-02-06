@@ -85,11 +85,11 @@ public class VendingMachine {
     }
 
     public void selectItem(InventoryItem item) {
-        selectedItem = item;
         if (item.soldOut) {
             machineMessage = "SOLD OUT";
             return;
         }
+        selectedItem = item;
         if (totalCredit >= item.cost) {
             buySelection();
         }

@@ -232,4 +232,21 @@ public class VendingMachineTest {
         assertEquals(vm.checkCoinReturn(), "COIN RETURN: $0.00");
         assertEquals(vm.getMachineMessage(), "EXACT CHANGE ONLY");
     }
+
+    @Test
+    public void AllItemsSoldOut() {
+        VendingMachine vm = new VendingMachine();
+        vm.makeItemSoldOut(vm.COLA);
+        vm.makeItemSoldOut(vm.CHIPS);
+        vm.makeItemSoldOut(vm.CANDY);
+        vm.selectItem(vm.COLA);
+        assertEquals(vm.getMachineMessage(), "SOLD OUT");
+        assertEquals(vm.getMachineMessage(), "INSERT COIN");
+        vm.selectItem(vm.CHIPS);
+        assertEquals(vm.getMachineMessage(), "SOLD OUT");
+        assertEquals(vm.getMachineMessage(), "INSERT COIN");
+        vm.selectItem(vm.CANDY);
+        assertEquals(vm.getMachineMessage(), "SOLD OUT");
+        assertEquals(vm.getMachineMessage(), "INSERT COIN");
+    }
 }
