@@ -68,6 +68,22 @@ public class VendingMachine {
             return true;
     }
 
+    private void setMachineMessageToDefaults() {
+        if (totalCredit == NO_CREDIT) {
+            if (exactChangeMode) {
+                machineMessage = "EXACT CHANGE ONLY";
+                return;
+            }
+            machineMessage = "INSERT COIN";
+        } else if (totalCredit > NO_CREDIT) {
+            machineMessage = "CREDIT:" + printFloatLikeMoney(totalCredit);
+        }
+    }
+
+    private String printFloatLikeMoney(float floatToParse) {
+        return " $" + String.format("%.2f", floatToParse);
+    }
+
     public void selectItem(InventoryItem item) {
         selectedItem = item;
         if (item.soldOut) {
@@ -82,21 +98,14 @@ public class VendingMachine {
         }
     }
 
-    private void setMachineMessageToDefaults() {
-        if (totalCredit == NO_CREDIT) {
-            if (exactChangeMode) {
-                machineMessage = "EXACT CHANGE ONLY";
-                return;
-            }
-            machineMessage = "INSERT COIN";
-        }
-        else if (totalCredit > NO_CREDIT) {
-            machineMessage = "CREDIT:" + printFloatLikeMoney(totalCredit);
-        }
+    public String getSelectedItemName() {
+        return selectedItem.name;
     }
 
-    private String printFloatLikeMoney(float floatToParse) {
-        return " $" + String.format("%.2f", floatToParse);
+    void handleBuyingSelection() {
+        if (totalCredit >= selectedItem.cost && selectedItem != NO_ITEM) {
+            buySelection();
+        }
     }
 
     private void buySelection() {
@@ -121,22 +130,12 @@ public class VendingMachine {
         return "COIN RETURN:" + printFloatLikeMoney(coinReturn);
     }
 
-    public String getSelectedItemName() {
-        return selectedItem.name;
-    }
-
     public void makeItemSoldOut(InventoryItem item) {
         item.setSoldOut(true);
     }
 
     public void setExactChangeMode(boolean setting) {
         exactChangeMode = setting;
-    }
-
-    void handleBuyingSelection() {
-        if (totalCredit >= selectedItem.cost && selectedItem != NO_ITEM) {
-            buySelection();
-        }
     }
 
     public class InventoryItem {
