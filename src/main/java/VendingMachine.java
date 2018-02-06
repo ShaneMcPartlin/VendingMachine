@@ -6,9 +6,6 @@ import javax.swing.plaf.basic.BasicInternalFrameTitlePane.RestoreAction;
 
 public class VendingMachine {
 
-    private float totalCredit = 0f;
-    private float coinReturn = 0f;
-
     private boolean exactChangeMode = false;
     private String machineMessage = "INSERT COIN";
 
@@ -23,6 +20,9 @@ public class VendingMachine {
     public InventoryItem NO_ITEM = new InventoryItem("", 0f);
     private InventoryItem selectedItem = NO_ITEM;
     private final float NO_CREDIT = 0f;
+
+    private float totalCredit = NO_CREDIT;
+    private float coinReturn = NO_CREDIT;
 
     public void addCoin(String coin) {
         totalCredit += getCoinValue(coin);
@@ -50,11 +50,10 @@ public class VendingMachine {
     }
 
     private String setMachineMessageToDisplayBetweenDefaultAndSpecialMessages() {
-        String messageToReturn = machineMessage;
+        String specialMessage = machineMessage;
         setMachineMessageToDefaults();
-        if (isNotDefaultMessage(messageToReturn)) {
-
-            return messageToReturn;
+        if (isNotDefaultMessage(specialMessage)) {
+            return specialMessage;
         }
         return machineMessage;
     }

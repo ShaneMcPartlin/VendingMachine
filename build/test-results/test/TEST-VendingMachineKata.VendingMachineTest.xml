@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="VendingMachineKata.VendingMachineTest" tests="23" skipped="0" failures="0" errors="0" timestamp="2018-02-06T09:35:29" hostname="Shanes-MacBook-Pro.local" time="0.007">
+<testsuite name="VendingMachineKata.VendingMachineTest" tests="24" skipped="0" failures="0" errors="0" timestamp="2018-02-06T15:07:48" hostname="Shanes-MacBook-Pro.local" time="0.007">
   <properties/>
   <testcase name="EnableExactChangeOnlyMode" classname="VendingMachineKata.VendingMachineTest" time="0.001"/>
   <testcase name="VendingMachineCorrectlyAddsQuarterNickelDimeAndPennyToTotalValue" classname="VendingMachineKata.VendingMachineTest" time="0.001"/>
@@ -15,8 +15,9 @@
   <testcase name="InsertFiveQuartersAndUseCoinReturn" classname="VendingMachineKata.VendingMachineTest" time="0.0"/>
   <testcase name="BuyAColaWithFiveQuartersAndCheckCoinReturn" classname="VendingMachineKata.VendingMachineTest" time="0.0"/>
   <testcase name="TestExactChangeOnlyModeWorksWithAPurchaseOfColaAndChipsAndCandyAndEverythingInBetween" classname="VendingMachineKata.VendingMachineTest" time="0.001"/>
-  <testcase name="InsertFourQuartersAndSelectColaAndCheckMessage" classname="VendingMachineKata.VendingMachineTest" time="0.0"/>
-  <testcase name="SelectColaAndCheckMessageThenInsertAQuarterAndCheckMessageAgain" classname="VendingMachineKata.VendingMachineTest" time="0.001"/>
+  <testcase name="AllItemsSoldOutAndUserTriesBuyingThem" classname="VendingMachineKata.VendingMachineTest" time="0.0"/>
+  <testcase name="InsertFourQuartersAndSelectColaAndCheckMessage" classname="VendingMachineKata.VendingMachineTest" time="0.001"/>
+  <testcase name="SelectColaAndCheckMessageThenInsertAQuarterAndCheckMessageAgain" classname="VendingMachineKata.VendingMachineTest" time="0.0"/>
   <testcase name="SelectCandyAndCheckMessageWithNoCoins" classname="VendingMachineKata.VendingMachineTest" time="0.0"/>
   <testcase name="InsertFourQuartersAndSelectColaAndCheckMessageTwice" classname="VendingMachineKata.VendingMachineTest" time="0.0"/>
   <testcase name="VendingMachingRejectsPennies" classname="VendingMachineKata.VendingMachineTest" time="0.0"/>
