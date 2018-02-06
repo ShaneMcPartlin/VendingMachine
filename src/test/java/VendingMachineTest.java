@@ -9,6 +9,8 @@ import static org.junit.Assert.*;
 import java.beans.Transient;
 import java.lang.String;
 
+import javax.accessibility.AccessibleAttributeSequence;
+
 public class VendingMachineTest {
 
     private final String PENNY = "penny";
@@ -66,13 +68,6 @@ public class VendingMachineTest {
     public void VendingMachineHasMessageINSERTCOIN() {
         VendingMachine vm = new VendingMachine();
         assertEquals(vm.getMachineMessage(), "INSERT COIN");
-    }
-
-    @Test
-    public void VendingMachineMessageIndicatesCreditAfterAddingCoins() {
-        VendingMachine vm = new VendingMachine();
-        vm.addCoin(QUARTER);
-        assertEquals(vm.getMachineMessage(), "CREDIT: $0.25");
     }
 
     @Test
@@ -200,5 +195,41 @@ public class VendingMachineTest {
         vm.setExactChangeMode(true);
         vm.addCoin(QUARTER);
         assertEquals(vm.getMachineMessage(), "CREDIT: $0.25");
+    }
+
+    @Test
+    public void TestExactChangeOnlyModeWorksWithAPurchaseOfColaAndChipsAndCandyAndEverythingInBetween() {
+        VendingMachine vm = new VendingMachine();
+        vm.setExactChangeMode(true);
+        vm.selectItem(vm.COLA);
+        assertEquals(vm.getMachineMessage(), "PRICE: $1.00");
+        vm.addCoin(QUARTER);
+        assertEquals(vm.getMachineMessage(), "CREDIT: $0.25");
+        vm.addCoin(QUARTER);
+        assertEquals(vm.getMachineMessage(), "CREDIT: $0.50");
+        vm.addCoin(QUARTER);
+        assertEquals(vm.getMachineMessage(), "CREDIT: $0.75");
+        vm.addCoin(QUARTER);
+        assertEquals(vm.getMachineMessage(), "THANK YOU");
+        assertEquals(vm.checkCoinReturn(), "COIN RETURN: $0.00");
+        assertEquals(vm.getMachineMessage(), "EXACT CHANGE ONLY");        
+        vm.addCoin(QUARTER);
+        assertEquals(vm.getMachineMessage(), "CREDIT: $0.25");
+        vm.addCoin(QUARTER);
+        assertEquals(vm.getMachineMessage(), "CREDIT: $0.50");
+        vm.selectItem(vm.CHIPS);
+        assertEquals(vm.getMachineMessage(), "THANK YOU");
+        vm.addCoin(NICKEL);
+        assertEquals(vm.getMachineMessage(), "CREDIT: $0.05");
+        vm.addCoin(DIME);
+        assertEquals(vm.getMachineMessage(), "CREDIT: $0.15");
+        vm.addCoin(QUARTER);
+        assertEquals(vm.getMachineMessage(), "CREDIT: $0.40");
+        vm.addCoin(QUARTER);
+        assertEquals(vm.getMachineMessage(), "CREDIT: $0.65");
+        vm.selectItem(vm.CANDY);
+        assertEquals(vm.getMachineMessage(), "THANK YOU");
+        assertEquals(vm.checkCoinReturn(), "COIN RETURN: $0.00");
+        assertEquals(vm.getMachineMessage(), "EXACT CHANGE ONLY");
     }
 }

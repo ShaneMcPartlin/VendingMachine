@@ -26,6 +26,7 @@ public class VendingMachine {
 
     public void addCoin(String coin) {
         totalCredit += getCoinValue(coin);
+        handleBuyingSelection();
         return;
     }
 
@@ -51,12 +52,20 @@ public class VendingMachine {
     private String setMachineMessageToDisplayBetweenDefaultAndSpecialMessages() {
         String messageToReturn = machineMessage;
         setMachineMessageToDefaults();
-        if (messageToReturn != "CREDIT:" + printFloatLikeMoney(totalCredit) &&
-            messageToReturn != "INSERT COIN" &&
-            messageToReturn != "EXACT CHANGE ONLY") {
+        if (isNotDefaultMessage(messageToReturn)) {
+
             return messageToReturn;
         }
         return machineMessage;
+    }
+
+    private boolean isNotDefaultMessage(String message) {
+        if (message.charAt(0) == 'C' ||
+            message == "INSERT COIN" ||
+            message == "EXACT CHANGE ONLY") {
+                return false;
+            }
+            return true;
     }
 
     public void selectItem(InventoryItem item) {
@@ -66,7 +75,6 @@ public class VendingMachine {
             return;
         }
         if (totalCredit >= item.cost) {
-            machineMessage = "THANK YOU";
             buySelection();
         }
         else if (totalCredit < item.cost) {
@@ -94,6 +102,7 @@ public class VendingMachine {
     private void buySelection() {
         makeChange();
         selectedItem = NO_ITEM;
+        machineMessage = "THANK YOU";
     }
 
     public void returnCoins() {
@@ -122,6 +131,12 @@ public class VendingMachine {
 
     public void setExactChangeMode(boolean setting) {
         exactChangeMode = setting;
+    }
+
+    void handleBuyingSelection() {
+        if (totalCredit >= selectedItem.cost && selectedItem != NO_ITEM) {
+            buySelection();
+        }
     }
 
     public class InventoryItem {
