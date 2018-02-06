@@ -1,6 +1,9 @@
 package VendingMachineKata;
 
 import org.junit.Test;
+
+import VendingMachineKata.VendingMachine;
+
 import static org.junit.Assert.*;
 
 import java.beans.Transient;
@@ -13,35 +16,35 @@ public class VendingMachineTest {
     private final String DIME = "dime";
     private final String QUARTER = "quarter";
 
-    @Test public void vendingMachingRejectsPennies() {
+    @Test public void VendingMachingRejectsPennies() {
         VendingMachine vm = new VendingMachine();
         vm.addCoin(PENNY);
         assertEquals(vm.getMachineMessage(), "INSERT COIN");
     }
 
     @Test
-    public void vendingMachineAcceptsNickels() {
+    public void VendingMachineAcceptsNickels() {
         VendingMachine vm = new VendingMachine();
         vm.addCoin(NICKEL);
         assertEquals(vm.getMachineMessage(), "CREDIT: $0.05");
     }
 
     @Test
-    public void vendingMachineAcceptsDimes() {
+    public void VendingMachineAcceptsDimes() {
         VendingMachine vm = new VendingMachine();
         vm.addCoin(DIME);
         assertEquals(vm.getMachineMessage(), "CREDIT: $0.10");
     }
 
     @Test
-    public void vendingMachineAcceptsQuarters() {
+    public void VendingMachineAcceptsQuarters() {
         VendingMachine vm = new VendingMachine();
         vm.addCoin(QUARTER);
         assertEquals(vm.getMachineMessage(), "CREDIT: $0.25");
     }
 
     @Test
-    public void vendingMachineCorrectlyAddsQuarterNickelAndDimeToTotalValue() {
+    public void VendingMachineCorrectlyAddsQuarterNickelAndDimeToTotalValue() {
         VendingMachine vm = new VendingMachine();
         vm.addCoin(QUARTER);
         vm.addCoin(NICKEL);
@@ -50,7 +53,7 @@ public class VendingMachineTest {
     }
 
     @Test
-    public void vendingMachineCorrectlyAddsQuarterNickelDimeAndPennyToTotalValue() {
+    public void VendingMachineCorrectlyAddsQuarterNickelDimeAndPennyToTotalValue() {
         VendingMachine vm = new VendingMachine();
         vm.addCoin(QUARTER);
         vm.addCoin(NICKEL);
@@ -60,13 +63,13 @@ public class VendingMachineTest {
     }
     
     @Test
-    public void vendingMachineHasMessageINSERTCOIN() {
+    public void VendingMachineHasMessageINSERTCOIN() {
         VendingMachine vm = new VendingMachine();
         assertEquals(vm.getMachineMessage(), "INSERT COIN");
     }
 
     @Test
-    public void vendingMachineMessageIndicatesCreditAfterAddingCoins() {
+    public void VendingMachineMessageIndicatesCreditAfterAddingCoins() {
         VendingMachine vm = new VendingMachine();
         vm.addCoin(QUARTER);
         assertEquals(vm.getMachineMessage(), "CREDIT: $0.25");
@@ -189,5 +192,13 @@ public class VendingMachineTest {
         VendingMachine vm = new VendingMachine();
         vm.setExactChangeMode(true);
         assertEquals(vm.getMachineMessage(), "EXACT CHANGE ONLY");
+    }
+
+    @Test
+    public void TestExactChangeOnlyModeWorksWithCoinsAsWell() {
+        VendingMachine vm = new VendingMachine();
+        vm.setExactChangeMode(true);
+        vm.addCoin(QUARTER);
+        assertEquals(vm.getMachineMessage(), "CREDIT: $0.25");
     }
 }
