@@ -1,3 +1,5 @@
+package VendingMachineKata;
+
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -6,7 +8,6 @@ import java.lang.String;
 
 public class VendingMachineTest {
 
-    private final float marginOfErrorForComparingFloats = 0;
     private final String PENNY = "penny";
     private final String NICKEL = "nickel";
     private final String DIME = "dime";
@@ -15,28 +16,28 @@ public class VendingMachineTest {
     @Test public void vendingMachingRejectsPennies() {
         VendingMachine vm = new VendingMachine();
         vm.addCoin(PENNY);
-        assertEquals(vm.getTotalCredit(), 0f, marginOfErrorForComparingFloats);
+        assertEquals(vm.getMachineMessage(), "INSERT COIN");
     }
 
     @Test
     public void vendingMachineAcceptsNickels() {
         VendingMachine vm = new VendingMachine();
         vm.addCoin(NICKEL);
-        assertEquals(vm.getTotalCredit(), 0.05f, marginOfErrorForComparingFloats);
+        assertEquals(vm.getMachineMessage(), "CREDIT: $0.05");
     }
 
     @Test
     public void vendingMachineAcceptsDimes() {
         VendingMachine vm = new VendingMachine();
         vm.addCoin(DIME);
-        assertEquals(vm.getTotalCredit(), 0.1f, marginOfErrorForComparingFloats);
+        assertEquals(vm.getMachineMessage(), "CREDIT: $0.10");
     }
 
     @Test
     public void vendingMachineAcceptsQuarters() {
         VendingMachine vm = new VendingMachine();
         vm.addCoin(QUARTER);
-        assertEquals(vm.getTotalCredit(), 0.25f, marginOfErrorForComparingFloats);
+        assertEquals(vm.getMachineMessage(), "CREDIT: $0.25");
     }
 
     @Test
@@ -45,7 +46,7 @@ public class VendingMachineTest {
         vm.addCoin(QUARTER);
         vm.addCoin(NICKEL);
         vm.addCoin(DIME);
-        assertEquals(vm.getTotalCredit(), 0.40f, marginOfErrorForComparingFloats);
+        assertEquals(vm.getMachineMessage(), "CREDIT: $0.40");
     }
 
     @Test
@@ -55,7 +56,7 @@ public class VendingMachineTest {
         vm.addCoin(NICKEL);
         vm.addCoin(DIME);
         vm.addCoin(PENNY);
-        assertEquals(vm.getTotalCredit(), 0.40f, marginOfErrorForComparingFloats);
+        assertEquals(vm.getMachineMessage(), "CREDIT: $0.40");
     }
     
     @Test
